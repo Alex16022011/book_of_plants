@@ -1,9 +1,6 @@
 from tkinter import *
 import os
 from datetime import *
-from fpdf import *
-from docx import *
-from spire.doc import *
 
 window = Tk()
 window.geometry('1268x833+1+70')
@@ -337,13 +334,12 @@ def open_file_txt_to_print():
 
 def open_window_docx():
     # if not os.path.exists("Дневник семян.docx"):
-    doc = Document()
+    from docx import Document
     if not os.path.exists("Дневник семян.txt"):
         file = open('Дневник семян.txt', 'w')
         file.close()
     if len(open('Дневник семян.txt', 'r').readlines()) > 1:
         file = open('Дневник семян.txt', 'r', encoding='utf-8')
-        doc = Document()
         list1 = file.readlines()
         list2 = list1.copy()
         file.close()
@@ -358,9 +354,6 @@ def open_window_docx():
                 list3[i][j] = list3[i][j][1:-1].split('|')
         print(f'list3 = {list3}')
 
-        table = doc.add_table(rows=len(list3), cols=6)
-        table.style = 'Table Grid'
-
         columns_from_first_to_third = []
         for i in range(6):
             stroka = ''
@@ -368,73 +361,50 @@ def open_window_docx():
                 stroka += (str(list3[0][j][i]) + '\n')
             columns_from_first_to_third.append(stroka[:-2])
         print(columns_from_first_to_third)
+
+        def filler(column):
+            columns_from_third_to_the_end = []
+            help = []
+            for j in range(1, len(list3)):
+                stroka = ''
+                help2 = []
+                # for i in range(6):
+                for k in range(len(list3[j])):
+                    stroka += str(list3[j][k][column] + '\n')
+                help2.append(stroka.strip())
+                help.append(help2)
+            columns_from_third_to_the_end.append(help)
+            print(f'columns_from_third_to_the_end = {columns_from_third_to_the_end}')
+            for i in range(len(columns_from_third_to_the_end)):
+                for j in range(len(columns_from_third_to_the_end[i])):
+                    table.cell(j + 1, i + column).text = columns_from_third_to_the_end[i][j]
+                    print(f'j, i = {j, i}')
+
+        doc = Document()
+        table = doc.add_table(rows=len(list3), cols=6)
+        table.style = 'Table Grid'
+
         for i in range(len(columns_from_first_to_third)):
             table.cell(0, i).text = columns_from_first_to_third[i]
 
-        columns_from_first_to_the_end = []
-        for i in range(6):
-            stroka = ''
-            columns_from_first_to_the_end_to_help = []
-            for j in range(1, len(list3)):
-                for k in range(len(list3[j])):
-                    stroka += (str(list3[j][k][i]) + '\n')
-            columns_from_first_to_the_end_to_help.append(stroka[:-2].lstrip())
-            columns_from_first_to_the_end.append(columns_from_first_to_the_end_to_help)
-        print(columns_from_first_to_the_end)
-        for i in range(len(columns_from_first_to_the_end)):
-            for j in range(len(columns_from_first_to_the_end[i])):
-                table.cell(j + 1, i).text = columns_from_first_to_the_end[i][j]
-        # file2 = open('Дневник семян.txt', 'r', encoding='utf-8')
-        # list1 = file2.readlines()
-        # list2 = list1.copy()
-        # file2.close()
-        # for i in list1:
-        #     if list2[list2.index(i)].rstrip() == '|-------------------|------------|------------|------------|----------|---------|':
-        #         del list2[list2.index(i)]
-        #     else:
-        #         list2[list2.index(i)] = list2[list2.index(i)].rstrip()
-        # list_to_insert_in_docx_from_txt = []
-        # print(list2)
-        # for i in list2:
-        #     list_to_insert_in_docx_from_txt.append(i[1:-1].split('|'))
-        # print(list_to_insert_in_docx_from_txt)
-        #
-        # list_to_heading = []
-        # for i in range(6):
-        #     list_to_heading.append(f'{list_to_insert_in_docx_from_txt[0][i]}\n{list_to_insert_in_docx_from_txt[1][i]}\n'
-        #                          f'{list_to_insert_in_docx_from_txt[2][i]}')
-        # print(list_to_heading)
-        # list2 = list_to_heading
-        # list_to_after_heading = []
-        # list_to_help_to_after_heading = []
-        # for i in range(6):
-        #     stroka = ''
-        #     for j in range(3, len(list_to_insert_in_docx_from_txt)):
-        #         stroka += f'{list_to_insert_in_docx_from_txt[j][i]}\n'
-        #     list_to_help_to_after_heading.append(stroka)
-        # list_to_after_heading.append(list_to_help_to_after_heading)
-        # table = doc.add_table(rows=len(list_to_after_heading) + 1, cols=6)
-        # table.style = 'Table Grid'
-        # for j in range(6):
-        #     table.cell(0, j).text = list2[j]
-        # for i in range(len(list_to_after_heading)):
-        #     for j in range(6):
-        #         table.cell(i + 1, j).text = list_to_after_heading[i][j]
-        # print(list_to_after_heading)
+        for j in range(6):
+            filler(j)
 
         doc.save('Дневник семян.docx')
-        os.startfile('Дневник семян.docx')
+    os.startfile('Дневник семян.docx')
 
 
 def open_window_pdf():
+    from fpdf import FPDF
+    from spire.doc import FileFormat, Document
     if not os.path.exists("Дневниксемян.pdf"):
         pdf = FPDF()
         pdf.add_page()
         pdf.output("Дневниксемян.pdf")
-    if os.path.exists("Дневник семян.docx"):
+    if os.path.exists("Дневниксемян.docx"):
         document = Document()
 
-        document.LoadFromFile("Дневник семян.docx")
+        document.LoadFromFile("Дневниксемян.docx")
 
         document.SaveToFile("Дневниксемян.pdf", FileFormat.PDF)
 

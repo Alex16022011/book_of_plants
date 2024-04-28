@@ -410,25 +410,13 @@ def open_window_pdf():
         document.Close()
     os.system("start Дневниксемян.pdf")
 
-#
-# def open_window_exel():
-#     if not os.path.exists("Дневниксемян.excel"):
-#         file = open('Дневниксемян.excel', 'w')
-#         file.close()
-#     os.system("start EXCEL.EXE Дневниксемян.excel")
-
 
 btn1 = Button(window, text='Отправить', font='Arial 20', command=collecting_information)
 btn2 = Button(window, text='Открыть файл txt', font='Arial 20', command=open_window_txt)
 btn3 = Button(window, text='Открыть файл docx', font='Arial 20', command=open_window_docx)
 btn4 = Button(window, text='Открыть файл pdf', font='Arial 20', command=open_window_pdf)
-# btn5 = Button(window, text='Открыть файл excel', font='Arial 20', command=open_window_exel)
 btn6 = Button(window, text='Заметки', font='Arial 20', command=notes)
 btn7 = Button(window, text='Открыть файл txt для рукописного заполнения', font='Arial 20', command=open_file_txt_to_print)
-# img = ImageTk.PhotoImage(Image.open("C:/Users/user/PycharmProjects/Семяна/картинка.jpg"))
-# panel = Label(window, image = img)
-# panel.grid(row=9, column=2, rowspan=4)
-
 
 def to_bind(event):
     collecting_information()
@@ -441,7 +429,6 @@ btn2.grid(row=9, column=1, stick='we', columnspan=3, padx=5, pady=5)
 btn7.grid(row=10, column=1, stick='we', columnspan=3, padx=5, pady=5)
 btn3.grid(row=11, column=1, stick='we', columnspan=3, padx=5, pady=5)
 btn4.grid(row=12, column=1, stick='we', columnspan=3, padx=5, pady=5)
-# btn5.grid(row=13, column=1, stick='we', columnspan=3, padx=5, pady=5)
 btn6.grid(row=13, column=1, stick='we', columnspan=3, padx=5, pady=5)
 
 window.mainloop()

@@ -1,6 +1,8 @@
 from tkinter import *
 import os
 from datetime import *
+from fpdf import FPDF
+from spire.doc import FileFormat, Document
 
 window = Tk()
 window.geometry('1268x833+1+70')
@@ -159,7 +161,7 @@ def collecting_information():
         lbl_of_error = Label(window, text='Заполните правильно все поля!', font='Arial 25', bg='red', fg='white')
     if len(list_to_collect_information2) != 6:
         to_done = 1
-        lbl_of_error.grid(row=16, column=1, columnspan=3)
+        lbl_of_error.grid(row=14, column=1, columnspan=3)
     else:
         list_to_collect_information2 = tuple(list_to_collect_information2)
         entr1.delete(0, END)
@@ -333,7 +335,6 @@ def open_file_txt_to_print():
 
 
 def open_window_docx():
-    # if not os.path.exists("Дневник семян.docx"):
     from docx import Document
     if not os.path.exists("Дневник семян.txt"):
         file = open('Дневник семян.txt', 'w')
@@ -393,37 +394,35 @@ def open_window_docx():
         doc.save('Дневник семян.docx')
     os.startfile('Дневник семян.docx')
 
-
+# Дорабатывать работу с pdf через другой модуль!!!
 def open_window_pdf():
-    from fpdf import FPDF
-    from spire.doc import FileFormat, Document
     if not os.path.exists("Дневниксемян.pdf"):
         pdf = FPDF()
         pdf.add_page()
         pdf.output("Дневниксемян.pdf")
-    if os.path.exists("Дневниксемян.docx"):
+    if os.path.exists("Дневник семян.docx"):
         document = Document()
 
-        document.LoadFromFile("Дневниксемян.docx")
+        document.LoadFromFile("Дневник семян.docx")
 
         document.SaveToFile("Дневниксемян.pdf", FileFormat.PDF)
 
         document.Close()
     os.system("start Дневниксемян.pdf")
 
-
-def open_window_exel():
-    if not os.path.exists("Дневниксемян.excel"):
-        file = open('Дневниксемян.excel', 'w')
-        file.close()
-    os.system("start EXCEL.EXE Дневниксемян.excel")
+#
+# def open_window_exel():
+#     if not os.path.exists("Дневниксемян.excel"):
+#         file = open('Дневниксемян.excel', 'w')
+#         file.close()
+#     os.system("start EXCEL.EXE Дневниксемян.excel")
 
 
 btn1 = Button(window, text='Отправить', font='Arial 20', command=collecting_information)
 btn2 = Button(window, text='Открыть файл txt', font='Arial 20', command=open_window_txt)
 btn3 = Button(window, text='Открыть файл docx', font='Arial 20', command=open_window_docx)
 btn4 = Button(window, text='Открыть файл pdf', font='Arial 20', command=open_window_pdf)
-btn5 = Button(window, text='Открыть файл excel', font='Arial 20', command=open_window_exel)
+# btn5 = Button(window, text='Открыть файл excel', font='Arial 20', command=open_window_exel)
 btn6 = Button(window, text='Заметки', font='Arial 20', command=notes)
 btn7 = Button(window, text='Открыть файл txt для рукописного заполнения', font='Arial 20', command=open_file_txt_to_print)
 # img = ImageTk.PhotoImage(Image.open("C:/Users/user/PycharmProjects/Семяна/картинка.jpg"))
@@ -442,7 +441,7 @@ btn2.grid(row=9, column=1, stick='we', columnspan=3, padx=5, pady=5)
 btn7.grid(row=10, column=1, stick='we', columnspan=3, padx=5, pady=5)
 btn3.grid(row=11, column=1, stick='we', columnspan=3, padx=5, pady=5)
 btn4.grid(row=12, column=1, stick='we', columnspan=3, padx=5, pady=5)
-btn5.grid(row=13, column=1, stick='we', columnspan=3, padx=5, pady=5)
-btn6.grid(row=14, column=1, stick='we', columnspan=3, padx=5, pady=5)
+# btn5.grid(row=13, column=1, stick='we', columnspan=3, padx=5, pady=5)
+btn6.grid(row=13, column=1, stick='we', columnspan=3, padx=5, pady=5)
 
 window.mainloop()

@@ -1,4 +1,6 @@
-from tkinter import *
+import sys
+sys.path.append('.')
+from tkinter import Tk, Button, Label, END, Entry
 import os
 from datetime import *
 from fpdf import FPDF

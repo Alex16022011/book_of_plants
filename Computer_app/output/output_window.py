@@ -5,7 +5,7 @@ window.geometry('1268x833+1+70')
 window.resizable(False, False)
 window.title('Дневник семян')
 window.config(bg='green')
-if 
+# if 
 file_settings = open('C:/Users/МойКомпьютер/.vscode/book_of_plants/settings.txt', encoding='utf-8', )
 f = file_settings.readlines()
 file_settings.close()

@@ -3,6 +3,8 @@ sys.path.append('.')
 from Computer_app.analysing.data_analyse import check_on_right_date
 import os
 from string import ascii_lowercase
+import re
+
 
 def every_email_letter_is_latin(email):
     a = ascii_lowercase
@@ -15,15 +17,25 @@ def every_email_letter_is_latin(email):
         return True
     return False
 
+
 def right_email(email):
-    if '@' in email and every_email_letter_is_latin(email):
+    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+    if re.fullmatch(regex, email):
         return True
     return False
 
-def right_phone_number(phone):
-    # if pass:
-    #     return True
-    return False
+
+def right_phone_number(phone_number):
+    import phonenumbers
+    from phonenumbers import carrier
+    from phonenumbers.phonenumberutil import number_type
+    number = phone_number
+    try:
+        if carrier._is_mobile(number_type(phonenumbers.parse(number))):
+            return True
+    except Exception:
+        return False
+
 
 def right_registration(first_name, second_name, third_name, date, email, login, password1, password2, phone):
     global to_change
@@ -53,16 +65,16 @@ def right_registration(first_name, second_name, third_name, date, email, login, 
         to_change += 'ввести правильный номер телефона'
 
     if counter == 9:
-        if not os.path.exists('Дневник семян.txt'):
-            file = open('Data_of_user', 'w')
+        if not os.path.exists('Data_of_user.txt'):
+            file = open('Data_of_user.txt', 'w', encoding='utf-8')
             file.close()
-        file = open('Data_of_user', 'r+')
+        file = open('Data_of_user.txt', 'r+', encoding='utf-8')
         lines = file.readlines()
         file.close()
         if len(lines) > 0:
-            file = open('Data_of_user', 'w')
+            file = open('Data_of_user.txt', 'w', encoding='utf-8')
             file.close()
-        file = open('Data_of_user', 'r+')
+        file = open('Data_of_user.txt', 'r+', encoding='utf-8')
         file.write(f'Имя пользователя: {first_name}\n')
         file.write(f'Фамилия пользователя: {second_name}\n')
         file.write(f'Отчество пользователя: {third_name}\n')
@@ -75,9 +87,9 @@ def right_registration(first_name, second_name, third_name, date, email, login, 
         return True
     return False, to_change
 
+
 to_change = 'Надо исправить: '
 
 
-
 if __name__ == '__main__':
-    assert right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'email', 'login', 'asdfvcxz16022011', 'asdfvcxz16022011', '+7 920 067 52 23')
+    assert right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'bobkovalex.yaundex.ru@yandex.ru', 'login', 'asdfvcxz16022011', 'asdfvcxz16022011', '+7 920 067 52 23') == True

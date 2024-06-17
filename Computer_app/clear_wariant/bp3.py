@@ -420,6 +420,7 @@ btn4 = Button(window, text='Открыть файл pdf', font='Arial 20', comma
 btn6 = Button(window, text='Заметки', font='Arial 20', command=notes)
 btn7 = Button(window, text='Открыть файл txt для рукописного заполнения', font='Arial 20', command=open_file_txt_to_print)
 
+
 def to_bind(event):
     collecting_information()
 

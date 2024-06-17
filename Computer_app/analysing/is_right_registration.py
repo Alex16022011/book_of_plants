@@ -6,7 +6,7 @@ from string import ascii_lowercase
 import re
 
 
-def every_email_letter_is_latin(email):
+def is_every_email_letter_is_latin(email):
     a = ascii_lowercase
     counter, counter2 = 0, 0
     for i in email:
@@ -18,14 +18,14 @@ def every_email_letter_is_latin(email):
     return False
 
 
-def right_email(email):
+def is_right_email(email):
     regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
     if re.fullmatch(regex, email):
         return True
     return False
 
 
-def right_phone_number(phone_number):
+def is_right_phone_number(phone_number):
     import phonenumbers
     from phonenumbers import carrier
     from phonenumbers.phonenumberutil import number_type
@@ -33,11 +33,11 @@ def right_phone_number(phone_number):
     try:
         if carrier._is_mobile(number_type(phonenumbers.parse(number))):
             return True
-    except Exception:
+    except:
         return False
 
 
-def right_registration(first_name, second_name, third_name, date, email, login, password1, password2, phone):
+def is_right_registration(first_name, second_name, third_name, date, email, login, password1, password2, phone):
     global to_change
     counter = 1
 
@@ -59,7 +59,7 @@ def right_registration(first_name, second_name, third_name, date, email, login, 
     else:
         to_change += 'ввести одинаковые пароли'
 
-    if right_phone_number(phone):
+    if is_right_phone_number(phone):
         counter += 1
     else:
         to_change += 'ввести правильный номер телефона'
@@ -92,4 +92,4 @@ to_change = 'Надо исправить: '
 
 
 if __name__ == '__main__':
-    assert right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'bobkovalex.yaundex.ru@yandex.ru', 'login', 'asdfvcxz16022011', 'asdfvcxz16022011', '+7 920 067 52 23') == True
+    assert is_right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'bobkovalex.yaundex.ru@yandex.ru', 'login', 'asdfvcxz16022011', 'asdfvcxz16022011', '+7 920 067 52 23') == True

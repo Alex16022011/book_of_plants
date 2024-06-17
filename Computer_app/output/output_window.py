@@ -11,7 +11,7 @@ window.config(bg='green')
 file_settings = open('settings.txt', 'r', encoding='utf-8')
 f = file_settings.readlines()
 file_settings.close()
-counter = 0
+counter = 1
 lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
 
 
@@ -20,15 +20,16 @@ def list_page():
     global entr1
     global entr2
     global lbl3
-    counter += 1
     if counter == 1:
         counter_1 = 0
-        if len(entr0.get()) == 0:
+        if len(entr0.get()) == 0 and counter_1 == 0:
             counter_1 = 1
             lbl3.grid(row=2, column=0, padx=(480, 10), pady=(50, 0))
-        elif counter_1 == 1:
-            lbl3.destroy()
-            lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
+        else:
+            if counter_1 == 1:
+                lbl3.destroy()
+                lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
+        if counter_1 == 0:
             list1 = [entr0.get()]
             lbl0.destroy()
             entr0.destroy()
@@ -41,6 +42,7 @@ def list_page():
             entr2 = Entry(window, font='Arial 20', bg='white', fg='black')
             lbl2.grid(row=1, column=0, padx=(480, 10), pady=(100, 0))
             entr2.grid(row=1, column=0, padx=(480, 10), pady=(180, 0))
+            counter += 1
     if counter == 2:
         entr1 = entr1.get()
         entr2 = entr2.get()
@@ -76,7 +78,7 @@ if len(f) == 0:
     # btn0 = Button(window, text='Отправить', font='Arial 20', command=is_right_registration)
     # btn0.grid(row=2, column=0, padx=480, pady=(300, 0))
     btn0 = Button(window, text='Далее', font='Arial 30', command=list_page)
-    btn0.grid(row=3, column=1, padx=280, pady=(250, 0))
+    btn0.grid(row=3, column=1)
 
     # lbl1 = Label(window, text='Введите ваш пароль:', font='Arial 20', bg='green', fg='white')
     # lbl1.grid(row=0, column=1)

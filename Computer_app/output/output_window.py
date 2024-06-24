@@ -31,24 +31,17 @@ def list_page():
             # 0 -> NO
             # 1 -> YES and if it was placed -> destroy
             need_place_error_or_not = 0
-            # 0 -> NO
-            # 1 -> YES
-            was_error_place_or_not = 0
         else:
             # 0 -> NO
             # 1 -> YES and if it was placed -> destroy
             need_place_error_or_not = 1
-            # 0 -> NO
-            # 1 -> YES
-            was_error_place_or_not = 1
         login = entr0.get()
         if len(login) == 0 and need_place_error_or_not == 0:
             need_place_error_or_not = 1
-            was_error_place_or_not = 1
             lbl3.place(x=500, y=500)
             print('FIRST IF IS DID')
             which_number_for_constants_for_login_will_be = 1
-        if need_place_error_or_not == 1 and len(login) != 0 and was_error_place_or_not == 1:
+        if need_place_error_or_not == 1 and len(login) != 0:
             lbl3.destroy()
             lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
             need_place_error_or_not = 0
@@ -83,8 +76,9 @@ def list_page():
         #         lbl3.place(x=500, y=600)
         # else:
         #     pass
-        # # else:
-        # #     list1['password'] = password1
+        # else:
+        #     list1['password'] = password1
+        #     print(list1)
         counter += 1
     if counter == 3:
         counter += 1

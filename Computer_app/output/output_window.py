@@ -13,6 +13,10 @@ f = file_settings.readlines()
 file_settings.close()
 counter = 1
 lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
+# 0 = NO
+# 1 = YES
+which_number_for_constants_for_login_will_be = 0
+which_number_for_constants_for_password_will_be = 0
 
 
 def list_page():
@@ -20,55 +24,72 @@ def list_page():
     global entr1
     global entr2
     global lbl3
+    global which_number_for_constants_for_login_will_be
+    global which_number_for_constants_for_password_will_be
     if counter == 1:
-        # 0 -> NO
-        # 1 -> YES and if it was placed -> destroy
-        place_or_not = 0
-        # 0 -> NO
-        # 1 -> YES
-        was_it_place_or_not = 0
-        a = entr0.get()
-        if len(a) == 0 and place_or_not == 0:
-            place_or_not = 1
-            was_it_place_or_not = 1
-            lbl3.place(x=500, y=500)
+        if which_number_for_constants_for_login_will_be == 0:
+            # 0 -> NO
+            # 1 -> YES and if it was placed -> destroy
+            need_place_error_or_not = 0
+            # 0 -> NO
+            # 1 -> YES
+            was_error_place_or_not = 0
         else:
-            if place_or_not == 1 and len(a) > 0 and was_it_place_or_not == 1:
-                lbl3.destroy()
-                lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
-                place_or_not = 0
-                print('YES')
-        if place_or_not == 0:
-            list1 = {'login': a}
+            # 0 -> NO
+            # 1 -> YES and if it was placed -> destroy
+            need_place_error_or_not = 1
+            # 0 -> NO
+            # 1 -> YES
+            was_error_place_or_not = 1
+        login = entr0.get()
+        if len(login) == 0 and need_place_error_or_not == 0:
+            need_place_error_or_not = 1
+            was_error_place_or_not = 1
+            lbl3.place(x=500, y=500)
+            print('FIRST IF IS DID')
+            which_number_for_constants_for_login_will_be = 1
+        if need_place_error_or_not == 1 and len(login) != 0 and was_error_place_or_not == 1:
             lbl3.destroy()
+            lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
+            need_place_error_or_not = 0
+            which_number_for_constants_for_login_will_be = 0
+            print('SECOND IF IS DID')
+        if need_place_error_or_not == 0:
+            list1 = {'login': login}
+            # lbl3.destroy()
             lbl0.destroy()
             entr0.destroy()
             lbl1 = Label(window, text='Введите ваш пароль:', font='Arial 20', bg='green', fg='white')
             entr1 = Entry(window, font='Arial 20', bg='white', fg='black')
-            # lbl1.place(x=, y=)
-            # entr1.place(x=, y=)
+            lbl1.place(x=500, y=200)
+            entr1.place(x=490, y=250)
 
             lbl2 = Label(window, text='Повторите ваш пароль:', font='Arial 20', bg='green', fg='white')
             entr2 = Entry(window, font='Arial 20', bg='white', fg='black')
-            # lbl2.place(x=, y=)
-            # entr2.place(x=, y=)
+            lbl2.place(x=500, y=400)
+            entr2.place(x=490, y=450)
             counter += 1
             print(list1)
+            del which_number_for_constants_for_login_will_be
     if counter == 2:
-        entr1 = entr1.get()
-        entr2 = entr2.get()
-        if entr1 != entr2:
-            lbl3 = Label(window, text='Пароли не совпадают', font='Arial 20', bg='red', fg='white')
-            # lbl3.place(x=, y=)
-        elif len(entr1) == 0 or len(entr2) == 0:
-            lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
-            # lbl3.place(x=, y=)
-        else:
-            pass
+        # password1 = entr1.get()
+        # password2 = entr2.get()
+        # if which_number_for_constants_for_password_will_be == 1:
+        #     if password1 != password2:
+        #         lbl3 = Label(window, text='Пароли не совпадают', font='Arial 20', bg='red', fg='white')
+        #         lbl3.place(x=500, y=600)
+        #     elif (len(password1) == 0 or len(password2) == 0) and (password1 != '' and password2 != ''):
+        #         lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
+        #         lbl3.place(x=500, y=600)
+        # else:
+        #     pass
+        # # else:
+        # #     list1['password'] = password1
+        counter += 1
     if counter == 3:
-        pass
+        counter += 1
     if counter == 4:
-        pass
+        counter += 1
 
 
 def start_presentation():

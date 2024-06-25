@@ -17,9 +17,11 @@ lbl3 = Label(window, text='Заполните все поля', font='Arial 20',
 # 1 = YES
 which_number_for_constants_for_login_will_be = 0
 which_number_for_constants_for_password_will_be = 0
+dict_of_data = {}
 
 
 def list_page():
+    global dict_of_data
     global counter
     global entr1
     global entr2
@@ -35,7 +37,7 @@ def list_page():
             # 0 -> NO
             # 1 -> YES and if it was placed -> destroy
             need_place_error_or_not = 1
-        login = entr0.get()
+        login = entr0.get().strip()
         if len(login) == 0 and need_place_error_or_not == 0:
             need_place_error_or_not = 1
             lbl3.place(x=500, y=500)
@@ -48,7 +50,7 @@ def list_page():
             which_number_for_constants_for_login_will_be = 0
             print('SECOND IF IS DID')
         if need_place_error_or_not == 0:
-            list1 = {'login': login}
+            dict_of_data['login'] = login
             # lbl3.destroy()
             lbl0.destroy()
             entr0.destroy()
@@ -62,23 +64,23 @@ def list_page():
             lbl2.place(x=500, y=400)
             entr2.place(x=490, y=450)
             counter += 1
-            print(list1)
+            print(dict_of_data)
             del which_number_for_constants_for_login_will_be
     if counter == 2:
-        # password1 = entr1.get()
-        # password2 = entr2.get()
-        # if which_number_for_constants_for_password_will_be == 1:
-        #     if password1 != password2:
-        #         lbl3 = Label(window, text='Пароли не совпадают', font='Arial 20', bg='red', fg='white')
-        #         lbl3.place(x=500, y=600)
-        #     elif (len(password1) == 0 or len(password2) == 0) and (password1 != '' and password2 != ''):
-        #         lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
-        #         lbl3.place(x=500, y=600)
-        # else:
-        #     pass
-        # else:
-        #     list1['password'] = password1
-        #     print(list1)
+        password1 = entr1.get()
+        password2 = entr2.get()
+        if which_number_for_constants_for_password_will_be == 1:
+            if password1 != password2:
+                lbl3 = Label(window, text='Пароли не совпадают', font='Arial 20', bg='red', fg='white')
+                lbl3.place(x=500, y=600)
+            elif (len(password1) == 0 or len(password2) == 0) and (password1 != '' and password2 != ''):
+                lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
+                lbl3.place(x=500, y=600)
+            else:
+                dict_of_data['password'] = password1
+                print(dict_of_data)
+        else:
+            pass
         counter += 1
     if counter == 3:
         counter += 1

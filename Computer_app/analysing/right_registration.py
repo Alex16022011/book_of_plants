@@ -29,7 +29,7 @@ def right_registration(first_name, second_name, third_name, date, email, login, 
     global to_change
     counter = 0
 
-    if login.strip() > 0:
+    if len(login.strip()) > 0:
         counter += 1
     else:
         to_change += 'ввести логин который состоит не только из пробелов,'

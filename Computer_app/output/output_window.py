@@ -1,5 +1,6 @@
 from tkinter import Tk, Label, Button, Entry
 from Computer_app.analysing.is_right_registration import is_right_registration
+from generate_passwords import generate_password
 import os
 window = Tk()
 
@@ -63,6 +64,9 @@ def list_page():
             entr2 = Entry(window, font='Arial 20', bg='white', fg='black')
             lbl2.place(x=500, y=400)
             entr2.place(x=490, y=450)
+
+            btn1 = Button(window, text='Сгенерировать безопасный пароль', font='Arial 20', command=insert_safe_password)
+            btn1.place(x=400, y=600)
             counter += 1
             print(dict_of_data)
             del which_number_for_constants_for_login_will_be
@@ -94,6 +98,14 @@ def start_presentation():
 
     file_path = "C:/Users/user/PycharmProjects/book_of_plants2/Презентация_проекта_book_of_plants_(Дневник_семян).pptx"
     open_powerpoint_presentation(file_path)
+
+
+def insert_safe_password():
+    global entr1
+    global entr2
+    a = generate_password()
+    entr1.insert(0, a)
+    entr2.insert(0, a)
 
 
 if len(f) == 0:

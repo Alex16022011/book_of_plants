@@ -1,14 +1,19 @@
+import sys
+sys.path.append('.')
 from tkinter import Tk, Label, Button, Entry
 from Computer_app.analysing.is_right_registration import is_right_registration
 from generate_passwords import generate_password
 import os
 window = Tk()
 
-window.geometry('1268x833+1+70')
+window.geometry('1268x750+150+20')
 window.resizable(False, False)
 window.title('Дневник семян')
 window.config(bg='green')
 
+if not os.path.exists('settings.txt'):
+    file = open('settings.txt', 'w', encoding='utf-8')
+    file.close()
 file_settings = open('settings.txt', 'r', encoding='utf-8')
 f = file_settings.readlines()
 file_settings.close()
@@ -17,7 +22,7 @@ lbl3 = Label(window, text='Заполните все поля', font='Arial 20',
 # 0 = NO
 # 1 = YES
 which_number_for_constants_for_login_will_be = 0
-which_number_for_constants_for_password_will_be = 0
+which_number_for_constants_for_password_will_be = -1
 dict_of_data = {}
 
 
@@ -26,7 +31,10 @@ def list_page():
     global counter
     global entr1
     global entr2
+    global lbl1
+    global lbl2
     global lbl3
+    global btn1
     global which_number_for_constants_for_login_will_be
     global which_number_for_constants_for_password_will_be
     if counter == 1:
@@ -73,19 +81,29 @@ def list_page():
     if counter == 2:
         password1 = entr1.get()
         password2 = entr2.get()
-        if which_number_for_constants_for_password_will_be == 1:
+        was_it_place_or_not = 0
+        if which_number_for_constants_for_password_will_be != -1:
             if password1 != password2:
                 lbl3 = Label(window, text='Пароли не совпадают', font='Arial 20', bg='red', fg='white')
                 lbl3.place(x=500, y=600)
+                was_it_place_or_not = 1
             elif (len(password1) == 0 or len(password2) == 0) and (password1 != '' and password2 != ''):
                 lbl3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
                 lbl3.place(x=500, y=600)
+                was_it_place_or_not = 1
             else:
                 dict_of_data['password'] = password1
+                lbl1.destroy()
+                entr1.destroy()
+                lbl2.destroy()
+                entr2.destroy()
+                btn1.destroy()
+                if was_it_place_or_not == 1:
+                    lbl3.destroy()
                 print(dict_of_data)
+                counter += 1
         else:
-            pass
-        counter += 1
+            which_number_for_constants_for_password_will_be = 0
     if counter == 3:
         counter += 1
     if counter == 4:
@@ -118,7 +136,7 @@ if len(f) == 0:
     # btn0 = Button(window, text='Отправить', font='Arial 20', command=is_right_registration)
     # btn0.grid(row=2, column=0, padx=480, pady=(300, 0))
     btn0 = Button(window, text='Далее', font='Arial 30', command=list_page)
-    btn0.place(x=1100, y=730)
+    btn0.place(x=1100, y=670)
 
     # lbl1 = Label(window, text='Введите ваш пароль:', font='Arial 20', bg='green', fg='white')
     # lbl1.grid(row=0, column=1)

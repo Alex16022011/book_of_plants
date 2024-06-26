@@ -26,6 +26,7 @@ def is_right_email(email):
 
 
 def is_right_phone_number(phone_number):
+    # Саму библиотеку не знаю, а также регурялные выражения выше -> взял из Интернета
     import phonenumbers
     from phonenumbers import carrier
     from phonenumbers.phonenumberutil import number_type

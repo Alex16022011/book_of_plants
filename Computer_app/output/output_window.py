@@ -6,7 +6,7 @@ from generate_passwords import generate_password
 import os
 window = Tk()
 
-window.geometry('1268x750+150+20')
+window.geometry('1268x750+1+20')
 window.resizable(False, False)
 window.title('Дневник семян')
 window.config(bg='green')

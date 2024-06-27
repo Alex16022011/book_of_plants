@@ -6,7 +6,7 @@ from generate_passwords import generate_password
 import os
 window = Tk()
 
-window.geometry('1268x750+150+20')
+window.geometry('1268x750+1+20')
 window.resizable(False, False)
 window.title('Дневник семян')
 window.config(bg='green')
@@ -29,6 +29,17 @@ dict_of_data = {}
 def clean_all_fields(*args):
     for i in args:
         i.delete(0, END)
+
+
+def write_in_txt_file(what_write: dict, *, name: str, encod: str, format: str,  separator: str = ':', end: str = '\n') -> None:
+    if len(what_write) > 0:
+        if not os.path.exists(name):
+            file = open(name, 'w+', encoding=encod)
+            file.close()
+        file = open(name, format, encoding=encod)
+        for i in what_write.keys():
+            file.write(f'{i} {separator} {what_write[i]}{end}')
+
 
 def list_page():
     global dict_of_data
@@ -99,12 +110,14 @@ def list_page():
                 was_it_place_or_not_for_password['lbl_error_2'] = True
                 if was_it_place_or_not_for_password['lbl_error_3']:
                     exec(f'lbl_error_3.destroy()')
+                    was_it_place_or_not_for_password['lbl_error_3'] = False
             elif (len(password1) == 0 or len(password2) == 0) and (password1 == '' and password2 == ''):
                 lbl_error_3 = Label(window, text='Заполните все поля', font='Arial 20', bg='red', fg='white')
                 lbl_error_3.place(x=500, y=660)
                 was_it_place_or_not_for_password['lbl_error_3'] = True
                 if was_it_place_or_not_for_password['lbl_error_2']:
                     exec(f'lbl_error_2.destroy()')
+                    was_it_place_or_not_for_password['lbl_error_2'] = False
             else:
                 dict_of_data['password'] = password1
                 lbl1.destroy()
@@ -113,8 +126,12 @@ def list_page():
                 entr2.destroy()
                 btn1.destroy()
                 btn2.destroy()
-                exec(f'lbl_error_2.destroy()')
-                exec(f'lbl_error_3.destroy()')
+                if was_it_place_or_not_for_password['lbl_error_2']:
+                    exec(f'lbl_error_2.destroy()')
+                    was_it_place_or_not_for_password['lbl_error_2'] = False
+                if was_it_place_or_not_for_password['lbl_error_3']:
+                    exec(f'lbl_error_3.destroy()')
+                    was_it_place_or_not_for_password['lbl_error_3'] = False
                 print(dict_of_data)
                 counter += 1
         else:
@@ -123,6 +140,7 @@ def list_page():
         counter += 1
     if counter == 4:
         counter += 1
+        write_in_txt_file(dict_of_data, name='settings.txt', encod='utf-8', format='w')
 
 
 def start_presentation():

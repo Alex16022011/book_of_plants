@@ -189,6 +189,10 @@ if len(f) == 0:
     # entr3.grid(row=1, column=3, padx=7)
     file_settings.close()
 
+# если что можно менять цифру
+elif len(f) == 2:
+    pass
+
 
 def to_bind(event):
     list_page()

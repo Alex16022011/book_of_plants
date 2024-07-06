@@ -1,21 +1,27 @@
 from turtle import *
 
 
-def earth():
+def earth() -> None:
     pass
 
-def solar():
+
+def solar() -> None:
     pass
 
-def horizonte():
+
+def horizonte() -> None:
     pass
 
-def sky():
+
+def sky() -> None:
     pass
 
-def tree():
+
+def tree() -> None:
     pass
+
 
 class StartOfApp:
     pass
-exitonclick()
+
+# exitonclick()

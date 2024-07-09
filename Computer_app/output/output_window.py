@@ -4,6 +4,8 @@ from tkinter import Tk, Label, Button, Entry, END
 from Computer_app.analysing.is_right_registration import is_right_registration
 from generate_passwords import generate_password
 import os
+# from Computer_app.the_screensaver.start import root
+
 window = Tk()
 
 window.geometry('1268x750+1+20')
@@ -153,43 +155,44 @@ def start_presentation():
 
 def insert_safe_password():
     global entr1
-    global entr2
     a = generate_password()
     entr1.delete(0, END)
-    entr2.delete(0, END)
     entr1.insert(0, a)
-    entr2.insert(0, a)
+
+
+def sign_in(username, password):
+    file_settings = open('settings.txt', 'r+', encoding='utf-8')
+
+    file_settings.write(f'username: {username}\n')
+    file_settings.write(f'password: {password}')
+    file_settings.close()
 
 
 if len(f) == 0:
-    file_settings = open('settings.txt', 'r+', encoding='utf-8')
-
-    lbl0 = Label(window, text='Придумайте логин:', font='Arial 20', bg='green', fg='white')
-    lbl0.place(x=510, y=250)
+    lbl0 = Label(window, text='Username or Email', font='Arial 20', bg='green', fg='white')
+    lbl0.place(x=510, y=150)
     entr0 = Entry(window, font='Arial 20', bg='white', fg='black')
-    entr0.place(x=480, y=300)
+    entr0.place(x=480, y=200)
     # btn0 = Button(window, text='Отправить', font='Arial 20', command=is_right_registration)
     # btn0.grid(row=2, column=0, padx=480, pady=(300, 0))
-    btn0 = Button(window, text='Далее', font='Arial 30', command=list_page)
-    btn0.place(x=1100, y=660)
+    lbl1 = Label(window, text='Password', font='Arial 20', bg='green', fg='white')
+    lbl1.place(x=560, y=300)
+    entr1 = Entry(window, font='Arial 20', bg='white', fg='black')
+    entr1.place(x=480, y=350)
 
-    # lbl1 = Label(window, text='Введите ваш пароль:', font='Arial 20', bg='green', fg='white')
-    # lbl1.grid(row=0, column=1)
-    # entr1 = Entry(window, font='Arial 20', bg='white', fg='black')
-    # entr1.grid(row=1, column=1, padx=7)
-    #
-    # lbl2 = Label(window, text='Введите ваш логин:', font='Arial 20', bg='green', fg='white')
-    # lbl2.grid(row=0, column=2)
-    # entr2 = Entry(window, font='Arial 20', bg='white', fg='black')
-    # entr2.grid(row=1, column=2, padx=7)
-    #
-    # lbl3 = Label(window, text='Введите ваш логин:', font='Arial 20', bg='green', fg='white')
-    # lbl3.grid(row=0, column=3)
-    # entr3 = Entry(window, font='Arial 20', bg='white', fg='black')
-    # entr3.grid(row=1, column=3, padx=7)
-    file_settings.close()
+    btn2 = Button(window, text='Generate a secure password', font='Arial 20', command=insert_safe_password)
+    btn2.place(x=440, y=450)
 
-# если что можно менять цифру
+    btn3 = Button(window, text='Sign in', font='Arial 20', command=lambda: sign_in(entr0.get(), entr1.get()))
+    btn3.place(x=570, y=580)
+
+
+    def to_bind2(event):
+        sign_in(entr0.get(), entr1.get())
+
+
+    window.bind('<Return>', to_bind2)
+
 elif len(f) == 2:
     pass
 
@@ -200,4 +203,5 @@ def to_bind(event):
 
 window.bind('<Return>', to_bind)
 
+# root.mainloop()
 window.mainloop()

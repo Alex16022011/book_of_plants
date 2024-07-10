@@ -4,7 +4,7 @@ from tkinter import Tk, Label, Button, Entry, END
 from Computer_app.analysing.is_right_registration import is_right_registration
 from generate_passwords import generate_password
 import os
-# from Computer_app.the_screensaver.start import root
+from Computer_app.the_screensaver.start import root
 
 window = Tk()
 
@@ -203,5 +203,5 @@ def to_bind(event):
 
 window.bind('<Return>', to_bind)
 
-# root.mainloop()
+root.mainloop()
 window.mainloop()

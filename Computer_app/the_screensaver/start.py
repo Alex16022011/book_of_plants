@@ -11,11 +11,15 @@ root = Tk()
 root.wm_attributes("-topmost", 1)
 root.resizable(width=False, height=False)
 root.overrideredirect(1)
-root.geometry(f"{width-500}x{height-500}+{width-1000}+{height-820}")
+window_width = 900
+window_height = 500
+x = int(int(root.winfo_screenwidth() / 2) - int(window_width / 2))
+y = int(int(root.winfo_screenheight() / 2) - int(window_height / 2))
+root.geometry(f"{window_width}x{window_height}+{x}+{y}")
 root['bg'] = '#7F00FF'
 
 lbl = Label(root, text='Дневник садовода\nи огородника', font='Arial 40', fg='#33FF33', bg='#7F00FF')
-lbl.place(x=170, y=200)
+lbl.place(x=150, y=200)
 
 def lbl2_com():
     global lbl2
@@ -33,20 +37,20 @@ def lbl3_com():
 
 
 lbl2 = Label(root, text=' ' * 30, font='Arial 40', fg='#7FFF00', bg='#7F00FF')
-x1 = 170
+x1 = 160
 y1 = 200
 lbl2.place(x=x1, y=y1)
 
-lbl3 = Label(root, text=' ' * 21, font='Arial 40', fg='#7FFF00', bg='#7F00FF')
-x2 = 240
+lbl3 = Label(root, text=' ' * 22, font='Arial 40', fg='#7FFF00', bg='#7F00FF')
+x2 = 230
 y2 = 270
 lbl3.place(x=x2, y=y2)
 
-for i in range(460):
+for i in range(570):
     root.after(1, lbl2_com)
     root.update()
     time.sleep(0.01)
-for i in range(400):
+for i in range(420):
     root.after(1, lbl3_com)
     root.update()
     time.sleep(0.01)

@@ -5,9 +5,13 @@ class Animal:
 
     def set_name(self, name):
         self.name = name
+        return self
 
     def get_name(self):
         print(self.name)
+
+    def __str__(self):
+        return f"Name - {self.name}, age - {self.age}"
 
 
 class Cat(Animal):
@@ -26,10 +30,13 @@ class Dog(Animal):
 
 
 cat = Cat("Bob", 2)
-cat.get_name()
+print(cat)
+cat.age = 1000000
+print(cat)
 
-Cat("Murka", 3).set_name("Bax")
-Cat("Murka", 3).get_name()
+# cat2 = Cat("Murka", 3).set_name('Bax')
+# print(cat2)
+# cat2.get_name()
 # cat.mau()
 # print(cat.name)
 # cat.set_name("Bax")

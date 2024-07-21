@@ -49,11 +49,11 @@ x2 = 240
 y2 = 270
 lbl3.place(x=x2, y=y2)
 
-for i in range(460):
+for i in range(570):
     root.after(1, lbl2_com)
     root.update()
     time.sleep(0.01)
-for i in range(400):
+for i in range(420):
     root.after(1, lbl3_com)
     root.update()
     time.sleep(0.01)

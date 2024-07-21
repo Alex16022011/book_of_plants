@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('.')
 from Computer_app.analysing.data_analyse import check_on_right_date
 import os
@@ -32,7 +33,7 @@ def right_phone_number(phone_number):
     try:
         if carrier._is_mobile(number_type(phonenumbers.parse(number))):
             return True
-    except Exception:
+    except:
         return False
 
 
@@ -89,7 +90,8 @@ def right_registration(first_name, second_name, third_name, date, email, login, 
 
 to_change = 'Надо исправить: '
 
-
 if __name__ == '__main__':
-    print(right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'email', 'login', 'asdfvcxz16022011', 'asdfvcxz16022011', '+7 (920) 067-52-23'))
-    assert right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'email', 'login', 'asdfvcxz16022011', 'asdfvcxz16022011', '+7 920 067 52 23') == True
+    print(right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'email', 'login', 'asdfvcxz16022011',
+                             'asdfvcxz16022011', '+7 (920) 067-52-23'))
+    assert right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'email', 'login', 'asdfvcxz16022011',
+                              'asdfvcxz16022011', '+7 920 067 52 23') == True

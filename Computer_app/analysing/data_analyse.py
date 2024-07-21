@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('.')
 
 
@@ -45,7 +46,7 @@ def preparation(data):
         else:
             return None
         return data
-    
+
     return None
 
 
@@ -66,4 +67,4 @@ if __name__ == '__main__':
     # assert check_on_right_date('') == 
     # assert check_on_right_date('') == 
     # assert check_on_right_date('') == 
-    # assert check_on_right_date('') == 
+    # assert check_on_right_date('') ==

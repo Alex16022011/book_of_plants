@@ -1,5 +1,6 @@
-#Генератор безопасных паролей
-from random import *
+# Генератор безопасных паролей
+from random import choice
+
 digits = '0123456789'
 lowercase_letters = 'abcdefghijklmnopqrstuvwxyz'
 uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'

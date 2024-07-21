@@ -1,6 +1,7 @@
 from tkinter import Tk, Label, Button, Entry
 from Computer_app.analysing.is_right_registration import is_right_registration
 import os
+
 window = Tk()
 
 window.geometry('1268x833+1+70')

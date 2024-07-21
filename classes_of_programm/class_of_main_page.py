@@ -1,7 +1,9 @@
 import sys
+
 sys.path.append('.')
 from customtkinter import *
 from Computer_app.about_computer.size_of_screen import know_the_size_of_screen
+
 
 class MainPage():
     def btn_of_chat(self, window):
@@ -9,7 +11,8 @@ class MainPage():
         btn.pack()
 
     def btn_of_help(self, window):
-        btn2 = CTkButton(master=window)    
+        btn2 = CTkButton(master=window)
+
 
 if __name__ == '__main__':
     root = CTk()

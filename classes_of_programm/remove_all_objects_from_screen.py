@@ -1,9 +1,12 @@
 import sys
+
 sys.path.append('.')
 from customtkinter import *
- 
+
+
 def destroy_all_from_screen(root, method: str) -> None:
     method = method.lower()
+    list1 = []
     if method == 'pack':
         list1 = root.pack_slaves()
     elif method == 'grid':

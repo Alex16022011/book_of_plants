@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('.')
 from customtkinter import *
 from Computer_app.about_computer.size_of_screen import know_the_size_of_screen
@@ -15,8 +16,8 @@ root.overrideredirect(1)
 root.config(bg='#7F00FF')
 window_width = 800
 window_height = 500
-x = int(int(root.winfo_screenwidth()/2) - int(window_width/2))
-y = int(int(root.winfo_screenheight()/2) - int(window_height/2))
+x = int(int(root.winfo_screenwidth() / 2) - int(window_width / 2))
+y = int(int(root.winfo_screenheight() / 2) - int(window_height / 2))
 root.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
 lbl = CTkLabel(root, text='Дневник садовода\nи огородника', font=('Arial', 40), fg_color='#33FF33', bg_color='#7F00FF')
@@ -24,12 +25,14 @@ lbl = CTkLabel(root, text='Дневник садовода\nи огородни�
 # lbl.grid(row=0, column=0)
 lbl.pack(anchor=CENTER)
 
+
 def lbl2_com():
     global lbl2
     global x1
     global y1
     x1 += 1
     lbl2.place(x=x1, y=y1)
+
 
 def lbl3_com():
     global lbl3
@@ -60,6 +63,5 @@ for i in range(420):
 
 time.sleep(2)
 root.destroy()
-
 
 root.mainloop()

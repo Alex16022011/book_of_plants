@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('.')
 from tkinter import Tk, Button, Label, END, Entry
 import os
@@ -254,7 +255,8 @@ def collecting_information():
                 flag = True
         if next_len_f - 54 < len(f) + max_len + 1 <= next_len_f and flag:
             for i in range(max_len):
-                file.write(f"| {list3[0][i] + ' ' * (17 - len(list3[0][i]))} | {list3[1][i] + ' ' * (10 - len(list3[1][i]))} | {list3[2][i] + ' ' * (10 - len(list3[2][i]))} | {list3[3][i] + ' ' * (10 - len(list3[3][i]))} | {list3[4][i] + ' ' * (8 - len(list3[4][i]))} | {list3[5][i] + ' ' * (8 - len(list3[5][i]))}|\n")
+                file.write(
+                    f"| {list3[0][i] + ' ' * (17 - len(list3[0][i]))} | {list3[1][i] + ' ' * (10 - len(list3[1][i]))} | {list3[2][i] + ' ' * (10 - len(list3[2][i]))} | {list3[3][i] + ' ' * (10 - len(list3[3][i]))} | {list3[4][i] + ' ' * (8 - len(list3[4][i]))} | {list3[5][i] + ' ' * (8 - len(list3[5][i]))}|\n")
             if len(f) % 54 == 0:
                 file.write('|-------------------|------------|------------|------------|----------|---------|\n')
                 file.write('| Название растения |    Дата    |    Дата    |    Дата    | Посажено | Собрано |\n')
@@ -275,7 +277,8 @@ def collecting_information():
                 file.write('|                   |    семян   |   урожая   |            |          |         |\n')
                 file.write('|-------------------|------------|------------|------------|----------|---------|\n')
                 for i in range(max_len):
-                    file.write(f"| {list3[0][i] + ' ' * (17 - len(list3[0][i]))} | {list3[1][i] + ' ' * (10 - len(list3[1][i]))} | {list3[2][i] + ' ' * (10 - len(list3[2][i]))} | {list3[3][i] + ' ' * (10 - len(list3[3][i]))} | {list3[4][i] + ' ' * (8 - len(list3[4][i]))} | {list3[5][i] + ' ' * (7 - len(list3[5][i]))}|\n")
+                    file.write(
+                        f"| {list3[0][i] + ' ' * (17 - len(list3[0][i]))} | {list3[1][i] + ' ' * (10 - len(list3[1][i]))} | {list3[2][i] + ' ' * (10 - len(list3[2][i]))} | {list3[3][i] + ' ' * (10 - len(list3[3][i]))} | {list3[4][i] + ' ' * (8 - len(list3[4][i]))} | {list3[5][i] + ' ' * (7 - len(list3[5][i]))}|\n")
             file.write('|-------------------|------------|------------|------------|----------|---------|\n')
         file.close()
 
@@ -288,7 +291,9 @@ lbl2 = Label(window, text='Дата посева семян', font='Arial 15', b
 lbl3 = Label(window, text='Дата сбора урожая', font='Arial 15', bg='green', fg='white')
 lbl4 = Label(window, text='Количество засеянных семян', font='Arial 15', bg='green', fg='white')
 lbl5 = Label(window, text='Количество собранного урожая', font='Arial 15', bg='green', fg='white')
-lbl6 = Label(window, text='Чтобы корректно напечатать текст в файле txt: \nоткройте: Блокнот / Файл / Параметры страницы / Поля(мм) ПРАВОЕ=15ММ, ЛЕВОЕ=15 ММ;\nВЕРХНИЙ КОЛОНТИТУЛ = Дневник семян;\n Сохранить', font='Arial 20', bg='blue', fg='white')
+lbl6 = Label(window,
+             text='Чтобы корректно напечатать текст в файле txt: \nоткройте: Блокнот / Файл / Параметры страницы / Поля(мм) ПРАВОЕ=15ММ, ЛЕВОЕ=15 ММ;\nВЕРХНИЙ КОЛОНТИТУЛ = Дневник семян;\n Сохранить',
+             font='Arial 20', bg='blue', fg='white')
 
 lbl1.grid(row=6, column=0)
 lbl2.grid(row=6, column=1)
@@ -347,7 +352,8 @@ def open_window_docx():
         list2 = list1.copy()
         file.close()
         list2 = list2[1:-1]
-        list3 = ''.join(list2).split('|-------------------|------------|------------|------------|----------|---------|\n')
+        list3 = ''.join(list2).split(
+            '|-------------------|------------|------------|------------|----------|---------|\n')
         print(list3)
         for i in list3:
             list3[list3.index(i)] = i.rstrip().split('\n')
@@ -396,6 +402,7 @@ def open_window_docx():
         doc.save('Дневник семян.docx')
     os.startfile('Дневник семян.docx')
 
+
 # Дорабатывать работу с pdf через другой модуль!!!
 def open_window_pdf():
     if not os.path.exists("Дневниксемян.pdf"):
@@ -418,7 +425,8 @@ btn2 = Button(window, text='Открыть файл txt', font='Arial 20', comma
 btn3 = Button(window, text='Открыть файл docx', font='Arial 20', command=open_window_docx)
 btn4 = Button(window, text='Открыть файл pdf', font='Arial 20', command=open_window_pdf)
 btn6 = Button(window, text='Заметки', font='Arial 20', command=notes)
-btn7 = Button(window, text='Открыть файл txt для рукописного заполнения', font='Arial 20', command=open_file_txt_to_print)
+btn7 = Button(window, text='Открыть файл txt для рукописного заполнения', font='Arial 20',
+              command=open_file_txt_to_print)
 
 
 def to_bind(event):

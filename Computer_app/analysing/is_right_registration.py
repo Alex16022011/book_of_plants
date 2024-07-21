@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('.')
 from Computer_app.analysing.data_analyse import check_on_right_date
 import os
@@ -91,6 +92,6 @@ def is_right_registration(first_name, second_name, third_name, date, email, logi
 
 to_change = 'Надо исправить: '
 
-
 if __name__ == '__main__':
-    assert is_right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'bobkovalex.yaundex.ru@yandex.ru', 'login', 'asdfvcxz16022011', 'asdfvcxz16022011', '+7 920 067 52 23') == True
+    assert is_right_registration('Алексей', 'Бобков', 'Владимирович', '16.02.2011', 'bobkovalex.yaundex.ru@yandex.ru',
+                                 'login', 'asdfvcxz16022011', 'asdfvcxz16022011', '+7 920 067 52 23') == True

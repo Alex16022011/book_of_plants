@@ -1,21 +1,28 @@
 import sys
 sys.path.append('.')
-from tkinter import *
+from customtkinter import *
 from Computer_app.about_computer.size_of_screen import know_the_size_of_screen
 import time
 
 width = know_the_size_of_screen()['width']
 height = know_the_size_of_screen()['height']
 
-root = Tk()
+root = CTk()
 root.wm_attributes("-topmost", 1)
 root.resizable(width=False, height=False)
 root.overrideredirect(1)
-root.geometry(f"{width-500}x{height-500}+{width-1000}+{height-820}")
-root['bg'] = '#7F00FF'
+# root.geometry(f"{width-1000}x{height-500}+{width-1400}+{height-820}")
+root.config(bg='#7F00FF')
+window_width = 800
+window_height = 500
+x = int(int(root.winfo_screenwidth()/2) - int(window_width/2))
+y = int(int(root.winfo_screenheight()/2) - int(window_height/2))
+root.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
-lbl = Label(root, text='Дневник садовода\nи огородника', font='Arial 40', fg='#33FF33', bg='#7F00FF')
-lbl.place(x=170, y=200)
+lbl = CTkLabel(root, text='Дневник садовода\nи огородника', font=('Arial', 40), fg_color='#33FF33', bg_color='#7F00FF')
+# lbl.place(x=170, y=200)
+# lbl.grid(row=0, column=0)
+lbl.pack(anchor=CENTER)
 
 def lbl2_com():
     global lbl2
@@ -32,12 +39,12 @@ def lbl3_com():
     lbl3.place(x=x2, y=y2)
 
 
-lbl2 = Label(root, text=' ' * 30, font='Arial 40', fg='#7FFF00', bg='#7F00FF')
+lbl2 = CTkLabel(root, text=' ' * 30, font=('Arial', 40), bg_color='#7F00FF')
 x1 = 170
 y1 = 200
 lbl2.place(x=x1, y=y1)
 
-lbl3 = Label(root, text=' ' * 21, font='Arial 40', fg='#7FFF00', bg='#7F00FF')
+lbl3 = CTkLabel(root, text=' ' * 21, font=('Arial', 40), bg_color='#7F00FF')
 x2 = 240
 y2 = 270
 lbl3.place(x=x2, y=y2)

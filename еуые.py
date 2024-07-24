@@ -40,7 +40,14 @@ def client():
 
 # Запуск сервера и клиента
 if __name__ == '__main__':
-    server_thread = threading.Thread(target=server)
-    client_thread = threading.Thread(target=client)
-    server_thread.start()
-    client_thread.start()
+    if len(sys.argv) < 2:
+        print("Usage: python chat.py server/client")
+        sys.exit(1)
+
+    mode = sys.argv[1]
+    if mode == 'server':
+        server()
+    elif mode == 'client':
+        client()
+    else:
+        print("Invalid mode. Please specify 'server' or 'client'.")
